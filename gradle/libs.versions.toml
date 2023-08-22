@@ -3,13 +3,14 @@ androidGradlePlugin = "7.4.1"
 androidxActivity = "1.7.2"
 androidxCompose = "1.4.3"
 androidxComposeMaterial3 = "1.1.1"
+androidxDataStore = "1.0.0"
 androidxHiltNavigationCompose = "1.0.0"
 androidxLifecycle = "2.6.1"
 androidxNavigation = "2.6.0"
 androidxRoom = "2.5.2"
 chucker = "4.0.0"
 hilt = "2.47"
-kotlin = "1.9.0"
+kotlin = "1.8.22"
 kotlinxCoroutines = "1.7.3"
 kotlinxSerialization = "1.5.1"
 retrofit = "2.9.0"
@@ -21,6 +22,7 @@ androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "androidxCompose" }
 androidx-compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "androidxComposeMaterial3" }
 androidx-core-ktx = "androidx.core:core-ktx:1.10.1"
+androidx-dataStore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "androidxDataStore" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
 androidx-lifecycle-runtimeCompose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 androidx-lifecycle-viewModelCompose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }

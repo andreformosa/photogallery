@@ -2,6 +2,7 @@ package com.andreformosa.photogallery.data.model.remote
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import com.andreformosa.photogallery.data.model.local.Photo as PhotoEntity
 
 @Serializable
 data class Photo(
@@ -15,4 +16,12 @@ data class Photo(
     val url: String,
     @SerialName("thumbnailUrl")
     val thumbnailUrl: String
+)
+
+fun Photo.asPhotoEntity() = PhotoEntity(
+    albumId = albumId,
+    id = id,
+    title = title,
+    url = url,
+    thumbnailUrl = thumbnailUrl
 )
