@@ -5,16 +5,16 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import com.andreformosa.photogallery.data.model.local.Album
+import com.andreformosa.photogallery.data.model.local.AlbumWithPhotos
 
 @Dao
 interface AlbumDao {
 
-//    @Query("SELECT * FROM album")
-//    suspend fun getAll(): List<Album>
-
+    @Transaction
     @Query("SELECT * FROM album ORDER BY page")
-    fun getAll(): PagingSource<Int, Album>
+    fun getAlbumsWithPhotos(): PagingSource<Int, AlbumWithPhotos>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(albums: List<Album>)

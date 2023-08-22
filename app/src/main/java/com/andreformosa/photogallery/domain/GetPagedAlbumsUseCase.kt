@@ -5,19 +5,19 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.andreformosa.photogallery.data.albums.AlbumsRemoteMediator
-import com.andreformosa.photogallery.data.api.JSONPlaceholderService
+import com.andreformosa.photogallery.data.albums.RemoteAlbumsDataSource
 import com.andreformosa.photogallery.data.database.AlbumsDatabase
-import com.andreformosa.photogallery.data.model.local.Album
+import com.andreformosa.photogallery.data.model.local.AlbumWithPhotos
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetPagedAlbumsUseCase @Inject constructor(
     private val database: AlbumsDatabase,
-    private val service: JSONPlaceholderService,
+    private val remoteDataSource: RemoteAlbumsDataSource
 ) {
 
     @OptIn(ExperimentalPagingApi::class)
-    operator fun invoke(): Flow<PagingData<Album>> {
+    operator fun invoke(): Flow<PagingData<AlbumWithPhotos>> {
         return Pager(
             config = PagingConfig(
                 pageSize = PAGE_SIZE,
@@ -25,16 +25,16 @@ class GetPagedAlbumsUseCase @Inject constructor(
                 initialLoadSize = PAGE_SIZE + 10,
             ),
             pagingSourceFactory = {
-                database.albumDao().getAll()
+                database.albumDao().getAlbumsWithPhotos()
             },
             remoteMediator = AlbumsRemoteMediator(
                 database,
-                service
+                remoteDataSource
             )
         ).flow
     }
 
     companion object {
-        private const val PAGE_SIZE = 20
+        private const val PAGE_SIZE = 10
     }
 }
