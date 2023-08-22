@@ -17,6 +17,7 @@ kotlinxSerialization = "1.5.1"
 retrofit = "2.9.0"
 
 [libraries]
+accompanist-placeholder-material = "com.google.accompanist:accompanist-placeholder-material:0.31.5-beta"
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }
 androidx-compose-ui-ui = { module = "androidx.compose.ui:ui", version.ref = "androidxCompose" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "androidxCompose" }

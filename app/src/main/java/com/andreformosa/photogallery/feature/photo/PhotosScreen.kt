@@ -1,0 +1,90 @@
+package com.andreformosa.photogallery.feature.photo
+
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import coil.compose.AsyncImage
+import com.andreformosa.photogallery.data.model.local.Photo
+import com.google.accompanist.placeholder.PlaceholderHighlight
+import com.google.accompanist.placeholder.material.placeholder
+import com.google.accompanist.placeholder.material.shimmer
+
+@Composable
+fun PhotosScreen(
+    viewModel: PhotosViewModel = hiltViewModel()
+) {
+    val photos by viewModel.photos.collectAsStateWithLifecycle()
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        PhotosList(
+            photos = photos,
+            onItemClick = { /* TODO */ }
+        )
+    }
+}
+
+@Composable
+private fun PhotosList(
+    photos: List<Photo>,
+    onItemClick: (Int) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(minSize = 128.dp),
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        verticalArrangement = Arrangement.spacedBy(4.dp),
+        content = {
+            items(photos) { photo ->
+                PhotoListItem(
+                    photo = photo,
+                    onClick = onItemClick
+                )
+            }
+        },
+        modifier = modifier.fillMaxSize()
+    )
+}
+
+@Composable
+private fun PhotoListItem(
+    photo: Photo,
+    onClick: (id: Int) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    var showShimmer by remember { mutableStateOf(true) }
+    AsyncImage(
+        model = photo.thumbnailUrl,
+        contentScale = ContentScale.Crop,
+        contentDescription = photo.title,
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .clickable(
+                enabled = true,
+                onClick = { onClick(photo.id) }
+            )
+            .placeholder(
+                visible = showShimmer,
+                color = MaterialTheme.colorScheme.secondary,
+                highlight = PlaceholderHighlight.shimmer()
+            ),
+        onSuccess = { showShimmer = false }
+    )
+}
