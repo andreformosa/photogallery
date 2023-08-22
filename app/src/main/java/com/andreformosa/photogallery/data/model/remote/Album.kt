@@ -12,7 +12,8 @@ data class Album(
     val title: String
 )
 
-fun Album.asAlbumEntity() = AlbumEntity(
+fun Album.asAlbumEntity(page: Int) = AlbumEntity(
     id = id,
-    title = title
+    title = title,
+    page = page
 )

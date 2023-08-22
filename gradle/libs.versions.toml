@@ -7,6 +7,7 @@ androidxDataStore = "1.0.0"
 androidxHiltNavigationCompose = "1.0.0"
 androidxLifecycle = "2.6.1"
 androidxNavigation = "2.6.0"
+androidxPaging = "3.1.1"
 androidxRoom = "2.5.2"
 chucker = "4.0.0"
 hilt = "2.47"
@@ -27,9 +28,12 @@ androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-com
 androidx-lifecycle-runtimeCompose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 androidx-lifecycle-viewModelCompose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "androidxNavigation" }
+androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "androidxPaging" }
+androidx-paging-compose = "androidx.paging:paging-compose:1.0.0-alpha20"
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidxRoom" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidxRoom" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidxRoom" }
+androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "androidxRoom" }
 androidx-splash-screen = "androidx.core:core-splashscreen:1.0.1"
 chucker = { module = "com.github.chuckerteam.chucker:library", version.ref = "chucker" }
 chucker-noOp = { module = "com.github.chuckerteam.chucker:library-no-op", version.ref = "chucker" }

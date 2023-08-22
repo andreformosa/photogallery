@@ -9,5 +9,9 @@ data class Album(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
     @ColumnInfo(name = "title")
-    val title: String
+    val title: String,
+
+    // Used only for the list, generated manually
+    @ColumnInfo(name = "page")
+    var page: Int,
 )

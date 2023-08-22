@@ -10,8 +10,8 @@ class RetrofitAlbumsDataSource @Inject constructor(
     private val service: JSONPlaceholderService,
 ) : RemoteAlbumsDataSource {
 
-    override suspend fun getAlbums(): ApiResponse<List<Album>> {
-        return service.getAlbums()
+    override suspend fun getAlbums(page: Int?): ApiResponse<List<Album>> {
+        return service.getAlbums(page)
     }
 
     override suspend fun getPhotosForAlbum(albumId: Int): ApiResponse<List<Photo>> {

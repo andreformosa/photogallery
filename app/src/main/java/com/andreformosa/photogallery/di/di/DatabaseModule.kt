@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.andreformosa.photogallery.data.albums.AlbumDao
 import com.andreformosa.photogallery.data.albums.PhotoDao
+import com.andreformosa.photogallery.data.albums.RemoteKeyDao
 import com.andreformosa.photogallery.data.database.AlbumsDatabase
 import dagger.Module
 import dagger.Provides
@@ -36,5 +37,11 @@ object DatabaseModule {
     @Provides
     fun providePhotoDao(albumsDatabase: AlbumsDatabase): PhotoDao {
         return albumsDatabase.photoDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideRemoteKeysDao(albumsDatabase: AlbumsDatabase): RemoteKeyDao {
+        return albumsDatabase.remoteKeyDao()
     }
 }

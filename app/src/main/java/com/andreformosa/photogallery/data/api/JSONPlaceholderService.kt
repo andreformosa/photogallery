@@ -5,6 +5,7 @@ import com.andreformosa.photogallery.data.model.remote.Photo
 import com.skydoves.sandwich.ApiResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface JSONPlaceholderService {
 
@@ -13,7 +14,9 @@ interface JSONPlaceholderService {
     }
 
     @GET("albums")
-    suspend fun getAlbums(): ApiResponse<List<Album>>
+    suspend fun getAlbums(
+        @Query("_page") page: Int?
+    ): ApiResponse<List<Album>>
 
     @GET("albums/{albumId}/photos")
     suspend fun getPhotosForAlbum(@Path("albumId") albumId: Int): ApiResponse<List<Photo>>
