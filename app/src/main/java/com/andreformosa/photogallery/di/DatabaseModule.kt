@@ -1,4 +1,4 @@
-package com.andreformosa.photogallery.di.di
+package com.andreformosa.photogallery.di
 
 import android.content.Context
 import androidx.room.Room

@@ -1,4 +1,4 @@
-package com.andreformosa.photogallery.di.di
+package com.andreformosa.photogallery.di
 
 import com.andreformosa.photogallery.data.albums.AlbumsRepository
 import com.andreformosa.photogallery.data.albums.OfflineFirstAlbumsRepository
