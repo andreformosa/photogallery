@@ -27,6 +27,8 @@ import coil.compose.AsyncImage
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.material.placeholder
 import com.google.accompanist.placeholder.material.shimmer
+import net.engawapg.lib.zoomable.rememberZoomState
+import net.engawapg.lib.zoomable.zoomable
 
 @Composable
 fun PhotoDetailsScreen(
@@ -47,8 +49,6 @@ fun PhotoDetailsScreen(
         }
 
         is PhotoDetailsUiState.Success -> {
-            // TODO: UI Changes
-
             val photo = uiState as PhotoDetailsUiState.Success
             Column(
                 modifier = Modifier
@@ -74,7 +74,8 @@ fun PhotoDetailsScreen(
                             visible = showShimmer,
                             color = MaterialTheme.colorScheme.secondary,
                             highlight = PlaceholderHighlight.shimmer()
-                        ),
+                        )
+                        .zoomable(rememberZoomState()),
                     onSuccess = { showShimmer = false }
                 )
             }

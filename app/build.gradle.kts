@@ -95,6 +95,7 @@ dependencies {
     implementation(libs.retrofit.kotlin.serialization)
     implementation(libs.sandwich)
     implementation(libs.timber)
+    implementation(libs.zoomable)
 
     debugImplementation(libs.chucker)
     debugImplementation(libs.androidx.compose.ui.tooling)

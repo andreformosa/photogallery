@@ -20,10 +20,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.andreformosa.photogallery.data.model.local.Photo
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.material.placeholder
@@ -74,7 +76,10 @@ private fun PhotosList(
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
         content = {
-            items(photos) { photo ->
+            items(
+                items = photos,
+                key = { photo -> photo.id }
+            ) { photo ->
                 PhotoListItem(
                     photo = photo,
                     onClick = onItemClick
@@ -93,7 +98,10 @@ private fun PhotoListItem(
 ) {
     var showShimmer by remember { mutableStateOf(true) }
     AsyncImage(
-        model = photo.thumbnailUrl,
+        model = ImageRequest.Builder(LocalContext.current)
+            .data(photo.thumbnailUrl)
+            .crossfade(true)
+            .build(),
         contentScale = ContentScale.Crop,
         contentDescription = photo.title,
         modifier = modifier
