@@ -13,6 +13,9 @@ interface PhotoDao {
     @Query("SELECT * FROM photo WHERE albumId = :albumId")
     fun getPhotosForAlbum(albumId: Int): Flow<List<Photo>>
 
+    @Query("SELECT * FROM photo WHERE id = :photoId")
+    suspend fun getPhotoById(photoId: Int): Photo?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(photos: List<Photo>)
 

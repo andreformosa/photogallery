@@ -21,6 +21,10 @@ class RoomAlbumsDataSource @Inject constructor(
         return photoDao.getPhotosForAlbum(albumId)
     }
 
+    override suspend fun getPhoto(photoId: Int): Photo? {
+        return photoDao.getPhotoById(photoId)
+    }
+
     override suspend fun insertPhotos(photos: List<Photo>) {
         photoDao.insertAll(photos)
     }

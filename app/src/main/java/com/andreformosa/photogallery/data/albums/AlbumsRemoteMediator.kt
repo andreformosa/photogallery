@@ -80,11 +80,8 @@ class AlbumsRemoteMediator(
                 database.remoteKeyDao().insertAll(remoteKeys)
                 database.albumDao()
                     .insertAll(albums.onEachIndexed { _, album -> album.page = page })
-                // TODO: See if this can be further optimized
-                for (albumWithPhotos in albumsWithPhotos) {
-                    val photos = albumWithPhotos.photos
-                    database.photoDao().insertAll(photos)
-                }
+                database.photoDao()
+                    .insertAll(albumsWithPhotos.flatMap { albumWithPhotos -> albumWithPhotos.photos })
             }
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (error: IOException) {
@@ -129,7 +126,10 @@ class AlbumsRemoteMediator(
         }
     }
 
-    // TODO: Document this
+    /**
+     * For each album in the list, run an async request to get its photos.
+     * Once all of the async requests finish, return a list with [AlbumWithPhotos].
+     */
     private suspend fun fetchPhotosForAlbums(albums: List<Album>): List<AlbumWithPhotos> =
         coroutineScope {
             val albumsWithPhotos = mutableListOf<AlbumWithPhotos>()
@@ -140,7 +140,8 @@ class AlbumsRemoteMediator(
                     val photos = if (photosResponse is ApiResponse.Success) {
                         photosResponse.data.map { it.asPhotoEntity() }
                     } else {
-                        emptyList() // Handle the case of failed photo response
+                        // In an ideal scenario, this case would be handled differently (such as a retry)
+                        emptyList()
                     }
                     AlbumWithPhotos(album, photos)
                 }

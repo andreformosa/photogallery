@@ -18,35 +18,6 @@ class OfflineFirstAlbumsRepository @Inject constructor(
     private val cacheInfoStore: CacheInfoStore
 ) : AlbumsRepository {
 
-//    /**
-//     * Emit cached albums if they exist.
-//     * If no cache exists or cache is stale, fetch from network, cache to database and emit.
-//     */
-//    override suspend fun getAlbums(): Flow<AlbumsResult> = flow {
-//        val cachedAlbums = localDataSource.getAllAlbums()
-//        if (cachedAlbums.isNotEmpty()) {
-//            emit(AlbumsResult.Success(cachedAlbums))
-//        }
-//
-//        if (isCacheStale() || cachedAlbums.isEmpty()) {
-//            when (val response = remoteDataSource.getAlbums()) {
-//                is ApiResponse.Success -> {
-//                    // Save albums to local storage
-//                    localDataSource.insertAlbums(response.data.map { it.asAlbumEntity() })
-//
-//                    // Update cache time
-//                    cacheInfoStore.setCacheUpdateTime(System.currentTimeMillis())
-//
-//                    // Get albums from local storage which is the source of truth
-//                    emit(AlbumsResult.Success(localDataSource.getAllAlbums()))
-//                }
-//
-//                is ApiResponse.Failure.Error,
-//                is ApiResponse.Failure.Exception -> emit(AlbumsResult.GenericError)
-//            }
-//        }
-//    }.flowOn(Dispatchers.IO)
-
     /**
      * Emit cached photos if they exist.
      * If no cache exists or cache is stale, fetch from network, cache to database and emit.
@@ -73,6 +44,10 @@ class OfflineFirstAlbumsRepository @Inject constructor(
                     }
                 }
             }
+    }
+
+    override suspend fun getPhoto(photoId: Int): Photo? {
+        return localDataSource.getPhoto(photoId)
     }
 
     private suspend fun isCacheStale(): Boolean {

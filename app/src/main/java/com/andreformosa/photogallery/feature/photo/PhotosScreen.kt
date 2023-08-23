@@ -31,7 +31,8 @@ import com.google.accompanist.placeholder.material.shimmer
 
 @Composable
 fun PhotosScreen(
-    viewModel: PhotosViewModel = hiltViewModel()
+    viewModel: PhotosViewModel = hiltViewModel(),
+    onNavigateToPhotoDetails: (photoId: Int) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -51,7 +52,7 @@ fun PhotosScreen(
             Box(modifier = Modifier.fillMaxSize()) {
                 PhotosList(
                     photos = (uiState as PhotosUiState.Success).photos,
-                    onItemClick = { /* TODO */ }
+                    onItemClick = { onNavigateToPhotoDetails(it) }
                 )
             }
         }
@@ -65,7 +66,7 @@ fun PhotosScreen(
 @Composable
 private fun PhotosList(
     photos: List<Photo>,
-    onItemClick: (Int) -> Unit,
+    onItemClick: (photoId: Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyVerticalGrid(
@@ -87,7 +88,7 @@ private fun PhotosList(
 @Composable
 private fun PhotoListItem(
     photo: Photo,
-    onClick: (id: Int) -> Unit,
+    onClick: (photoId: Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var showShimmer by remember { mutableStateOf(true) }

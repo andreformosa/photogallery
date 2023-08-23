@@ -5,11 +5,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface LocalAlbumsDataSource {
 
-//    suspend fun getAllAlbums(): List<Album>
-//
-//    suspend fun insertAlbums(albums: List<Album>)
-
     fun getPhotosForAlbum(albumId: Int): Flow<List<Photo>>
+
+    suspend fun getPhoto(photoId: Int): Photo?
 
     suspend fun insertPhotos(photos: List<Photo>)
 }
