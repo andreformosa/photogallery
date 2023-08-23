@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Photo Gallery</string>
+    <string name="albums_screen_empty_state">No albums available</string>
     <string name="photos_screen_empty_state">No photos in this album</string>
 </resources>

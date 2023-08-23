@@ -13,5 +13,5 @@ class AlbumsViewModel @Inject constructor(
     getPagedAlbumsUseCase: GetPagedAlbumsUseCase
 ) : ViewModel() {
 
-    val albumsWithPhotos: Flow<PagingData<AlbumWithPhotos>> = getPagedAlbumsUseCase()
+    val albumsWithPhotos: Flow<PagingData<AlbumWithPhotos>> = getPagedAlbumsUseCase.invoke()
 }
