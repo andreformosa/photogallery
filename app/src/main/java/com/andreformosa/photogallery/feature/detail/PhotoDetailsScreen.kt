@@ -80,9 +80,5 @@ fun PhotoDetailsScreen(
                 )
             }
         }
-
-//        PhotoDetailsUiState.EmptyOrErrorState -> {
-//            // TODO: Show empty/error state
-//        }
     }
 }

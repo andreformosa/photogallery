@@ -8,6 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,7 +28,9 @@ class PhotoDetailsViewModel @Inject constructor(
             if (photo != null) {
                 _uiState.value = PhotoDetailsUiState.Success(photo.title, photo.url)
             } else {
-                // TODO: Error state
+                // This is an exceptional case and should never happen.
+                // In a production app, it would make sense to handle this more gracefully.
+                Timber.e("Photo not found")
             }
         }
     }
@@ -36,5 +39,4 @@ class PhotoDetailsViewModel @Inject constructor(
 sealed interface PhotoDetailsUiState {
     object Loading : PhotoDetailsUiState
     data class Success(val title: String, val url: String) : PhotoDetailsUiState
-//    object EmptyOrErrorState : PhotoDetailsUiState
 }
