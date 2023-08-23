@@ -1,10 +1,9 @@
 package com.andreformosa.photogallery.data.albums
 
+import com.andreformosa.photogallery.data.model.local.Photo
 import kotlinx.coroutines.flow.Flow
 
 interface AlbumsRepository {
 
-    suspend fun getAlbums(): Flow<AlbumsResult>
-
-    suspend fun getPhotosForAlbum(albumId: Int): Flow<AlbumPhotosResult>
+    fun getPhotosForAlbum(albumId: Int): Flow<List<Photo>>
 }

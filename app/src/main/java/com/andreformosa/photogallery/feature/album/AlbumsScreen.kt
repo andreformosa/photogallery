@@ -37,14 +37,15 @@ import com.google.accompanist.placeholder.material.shimmer
 
 @Composable
 fun AlbumsScreen(
-    viewModel: AlbumsViewModel = hiltViewModel()
+    viewModel: AlbumsViewModel = hiltViewModel(),
+    onNavigateToPhotos: (albumId: Int) -> Unit
 ) {
     val albumsWithPhotos = viewModel.albumsWithPhotos.collectAsLazyPagingItems()
 
     Box(modifier = Modifier.fillMaxSize()) {
         AlbumsList(
             albumsWithPhotos = albumsWithPhotos,
-            onItemClick = { /* TODO */ }
+            onItemClick = { onNavigateToPhotos(it) }
         )
     }
 }

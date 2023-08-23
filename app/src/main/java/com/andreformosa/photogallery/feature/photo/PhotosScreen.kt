@@ -5,16 +5,19 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
@@ -30,13 +33,32 @@ import com.google.accompanist.placeholder.material.shimmer
 fun PhotosScreen(
     viewModel: PhotosViewModel = hiltViewModel()
 ) {
-    val photos by viewModel.photos.collectAsStateWithLifecycle()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    Box(modifier = Modifier.fillMaxSize()) {
-        PhotosList(
-            photos = photos,
-            onItemClick = { /* TODO */ }
-        )
+    when (uiState) {
+        PhotosUiState.Loading -> {
+            Box(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
+            }
+        }
+
+        is PhotosUiState.Success -> {
+            Box(modifier = Modifier.fillMaxSize()) {
+                PhotosList(
+                    photos = (uiState as PhotosUiState.Success).photos,
+                    onItemClick = { /* TODO */ }
+                )
+            }
+        }
+
+        PhotosUiState.EmptyOrErrorState -> {
+            // TODO: Show empty/error state
+        }
     }
 }
 
