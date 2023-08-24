@@ -101,4 +101,10 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     releaseImplementation(libs.chucker.noOp)
+
+    // Test dependencies
+    testImplementation(libs.jUnit)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.truth)
+    testImplementation(libs.turbine)
 }
