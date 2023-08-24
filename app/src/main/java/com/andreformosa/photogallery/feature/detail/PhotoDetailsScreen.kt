@@ -20,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -58,7 +59,8 @@ fun PhotoDetailsScreen(
             ) {
                 Text(
                     text = photo.title,
-                    style = MaterialTheme.typography.headlineMedium
+                    style = MaterialTheme.typography.headlineMedium,
+                    modifier = Modifier.testTag("photoTitle")
                 )
                 Spacer(modifier = Modifier.height(8.dp))
 
@@ -75,7 +77,8 @@ fun PhotoDetailsScreen(
                             color = MaterialTheme.colorScheme.secondary,
                             highlight = PlaceholderHighlight.shimmer()
                         )
-                        .zoomable(rememberZoomState()),
+                        .zoomable(rememberZoomState())
+                        .testTag("photo"),
                     onSuccess = { showShimmer = false }
                 )
             }
