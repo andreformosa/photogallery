@@ -17,7 +17,11 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.andreformosa.photogallery.utils.CustomTestRunner"
+
+        // Makes the Android Test Orchestrator run its "pm clear" command after each test invocation.
+        // This command ensures that the app's state is completely cleared between tests.
+        testInstrumentationRunnerArguments["clearPackageData"] = "true"
 
         vectorDrawables {
             useSupportLibrary = true
@@ -118,5 +122,7 @@ dependencies {
     androidTestImplementation(libs.androidx.test.runner)
     androidTestImplementation(libs.androidx.test.uiautomator)
     androidTestImplementation(libs.androidx.compose.ui.test)
+    androidTestImplementation(libs.hilt.android.testing)
+    kaptAndroidTest(libs.hilt.android.compiler)
     androidTestUtil(libs.androidx.test.orchestrator)
 }
