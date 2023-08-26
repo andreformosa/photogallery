@@ -55,7 +55,8 @@ fun PhotoDetailsScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(16.dp),
-                verticalArrangement = Arrangement.SpaceBetween
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
                     text = photo.title,
@@ -67,7 +68,7 @@ fun PhotoDetailsScreen(
                 var showShimmer by remember { mutableStateOf(true) }
                 AsyncImage(
                     model = photo.url,
-                    contentScale = ContentScale.Crop,
+                    contentScale = ContentScale.Fit,
                     contentDescription = photo.title,
                     modifier = Modifier
                         .fillMaxWidth()
